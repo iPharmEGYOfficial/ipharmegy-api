@@ -11,10 +11,12 @@ app.use(express.json());
 const healthRoute = require("./src/routes/health.route");
 const summaryRoute = require("./src/routes/summary.route");
 const dbTestRoute = require("./src/routes/dbtest.route");
+const exploreRoute = require("./src/routes/explore.route");
 
 app.use("/api/health", healthRoute);
 app.use("/api/smart-summary", summaryRoute);
 app.use("/api/dbtest", dbTestRoute);
+app.use("/api/explore", exploreRoute);
 
 // Root
 app.get("/", (req, res) => {
