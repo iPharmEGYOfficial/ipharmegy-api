@@ -22,11 +22,14 @@ router.get("/", async (req, res) => {
 
     const topSellingQuery = `
       SELECT TOP 10
-        CLS_ID,
-        SUM(ISNULL(SP_SD_QLT, 0)) AS TotalQty,
-        SUM(ISNULL(SP_SD_TOT_FORIGNVALUE, 0)) AS TotalSales
-      FROM SAL_POINT_INV_DET
-      GROUP BY CLS_ID
+        d.CLS_ID,
+        c.CLS_ARNAME AS ItemNameAr,
+        SUM(ISNULL(d.SP_SD_QLT, 0)) AS TotalQty,
+        SUM(ISNULL(d.SP_SD_TOT_FORIGNVALUE, 0)) AS TotalSales
+      FROM SAL_POINT_INV_DET d
+      LEFT JOIN CLASSES c
+        ON d.CLS_ID = c.CLS_ID
+      GROUP BY d.CLS_ID, c.CLS_ARNAME
       ORDER BY TotalQty DESC
     `;
 
