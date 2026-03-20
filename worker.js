@@ -1,32 +1,38 @@
 ﻿export default {
   async fetch(request) {
-    const url = new URL(request.url);
 
-    if (url.pathname === "/") {
-      return Response.json({
-        system: "iPharmEGY API",
-        status: "RUNNING"
-      });
+    // ✅ CORS HEADERS
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type"
+    };
+
+    // ✅ Handle preflight
+    if (request.method === "OPTIONS") {
+      return new Response(null, { headers });
     }
 
-    if (url.pathname === "/api/health") {
-      return Response.json({
+    const url = new URL(request.url);
+
+    if (url.pathname === "/api") {
+      return new Response(JSON.stringify({
         status: "OK",
         system: "iPharmEGY API",
         time: new Date().toISOString()
-      });
+      }), { headers });
     }
 
     if (url.pathname === "/api/smart-summary") {
-      return Response.json({
+      return new Response(JSON.stringify({
         totalSales: 125000,
-        totalOrders: 320,
-        topItem: "Panadol",
-        estimatedProfit: 25000,
-        message: "Smart summary mock data"
-      });
+        totalProfit: 25000,
+        topSelling: 15,
+        deadStock: 3,
+        lowStock: 8
+      }), { headers });
     }
 
-    return new Response("Not Found", { status: 404 });
+    return new Response("Not Found", { status: 404, headers });
   }
 };
