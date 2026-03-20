@@ -10,9 +10,11 @@ app.use(express.json());
 // Routes
 const healthRoute = require("./src/routes/health.route");
 const summaryRoute = require("./src/routes/summary.route");
+const dbTestRoute = require("./src/routes/dbtest.route");
 
 app.use("/api/health", healthRoute);
 app.use("/api/smart-summary", summaryRoute);
+app.use("/api/dbtest", dbTestRoute);
 
 // Root
 app.get("/", (req, res) => {
@@ -25,5 +27,5 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 4010;
 
 app.listen(PORT, () => {
-  console.log(`iPharmEGY API running on http://localhost:${PORT}`);
+  console.log("iPharmEGY API running on http://localhost:" + PORT);
 });
