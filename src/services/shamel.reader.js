@@ -3,7 +3,7 @@
 const connectionString =
   "Driver={ODBC Driver 18 for SQL Server};" +
   "Server=localhost\\SQLEXPRESS;" +
-  "Database=AMANSOFTS_PLUS;" +
+  "Database=D:\\DB_SPOIN\\AMANSOFTS_20_10_2025.MDF;" +
   "Trusted_Connection=Yes;" +
   "TrustServerCertificate=Yes;";
 
